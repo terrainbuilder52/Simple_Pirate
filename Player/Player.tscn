@@ -1,0 +1,183 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Player/player-Sheet2.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Interface/Control.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/ScreenShake.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Audio/ram.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/Cannon.wav" type="AudioStream" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "IdleLeft"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "IdleRight"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "MoveLeft"
+length = 0.4
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 10, 11 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "MoveRight"
+length = 0.4
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 8, 9 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "IdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "IdleRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=8]
+blend_point_0/node = SubResource( 6 )
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource( 7 )
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "MoveLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "MoveRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=11]
+blend_point_0/node = SubResource( 9 )
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource( 10 )
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachine" id=14]
+states/Idle/node = SubResource( 8 )
+states/Idle/position = Vector2( 584, 187 )
+states/Move/node = SubResource( 11 )
+states/Move/position = Vector2( 809, 187 )
+transitions = [ "Idle", "Move", SubResource( 12 ), "Move", "Idle", SubResource( 13 ) ]
+start_node = "Idle"
+graph_offset = Vector2( 109, 71 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+position = Vector2( 669, 330 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3 )
+rotation = -1.5708
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/IdleLeft = SubResource( 2 )
+anims/IdleRight = SubResource( 3 )
+anims/MoveLeft = SubResource( 4 )
+anims/MoveRight = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 15 )
+parameters/Idle/blend_position = 0.0
+parameters/Move/blend_position = Vector2( 0, 0 )
+
+[node name="cCoolDown" type="Timer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 4 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Control" parent="Camera2D/CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="NinePatchRect" parent="Camera2D/CanvasLayer/Control" index="3"]
+visible = false
+
+[node name="Rammed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="CannonFire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -11.68
+[connection signal="pressed" from="Camera2D/CanvasLayer/Control/NinePatchRect/Cannonball" to="." method="_on_Cannonball_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/Control/NinePatchRect/Repair" to="." method="_on_Repair_pressed"]
+
+[editable path="Camera2D/CanvasLayer/Control"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ram.wav-06672b53ae265ed1d7868b5ea73fa0d7.sample"
+
+[deps]
+
+source_file="res://Audio/ram.wav"
+dest_files=[ "res://.import/ram.wav-06672b53ae265ed1d7868b5ea73fa0d7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

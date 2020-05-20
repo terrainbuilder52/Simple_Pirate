@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Skies.ogg-ea5a0972524b733de8028654ea1c2125.oggstr"
+
+[deps]
+
+source_file="res://Audio/Skies.ogg"
+dest_files=[ "res://.import/Skies.ogg-ea5a0972524b733de8028654ea1c2125.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

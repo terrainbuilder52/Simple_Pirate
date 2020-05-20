@@ -1,0 +1,256 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Interface/CannonCounter/CannonCounter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Interface/GoldCounter/GoldCounter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Interface/BuyButton/button-Hover.png" type="Texture" id=3]
+[ext_resource path="res://Interface/BuyButton/button-Normal.png" type="Texture" id=4]
+[ext_resource path="res://Interface/BuyButton/button-Pressed.png" type="Texture" id=5]
+[ext_resource path="res://Interface/Fonts/Gugi-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Interface/counterBackground.png" type="Texture" id=7]
+[ext_resource path="res://Interface/Themes/default_theme.tres" type="Theme" id=8]
+[ext_resource path="res://Interface/Control.gd" type="Script" id=9]
+[ext_resource path="res://Interface/HealthCounter/HealthCounter.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Interface/Title_button_normal.png" type="Texture" id=11]
+[ext_resource path="res://Interface/Title_button_hover.png" type="Texture" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 15
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 9
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 6
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 28
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 12
+font_data = ExtResource( 6 )
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/Title_button_normal.png-f2d631961defa174fb3b14f264393323.stex"
+
+[sub_resource type="StreamTexture" id=7]
+load_path = "res://.import/Title_button_hover.png-a71867e5a5d5e2e7d6cd38993a0e28c2.stex"
+
+[node name="Control" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthCounter" parent="." instance=ExtResource( 10 )]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 41.0
+margin_bottom = 24.0
+
+[node name="CannonCounter" parent="." instance=ExtResource( 1 )]
+margin_left = 240.0
+margin_top = 8.0
+margin_right = 272.0
+margin_bottom = 24.0
+
+[node name="GoldCounter" parent="." instance=ExtResource( 2 )]
+margin_left = 280.0
+margin_top = 8.0
+margin_right = 312.0
+margin_bottom = 24.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -219.0
+margin_top = -76.0
+margin_right = 215.0
+margin_bottom = 8.0
+theme = ExtResource( 8 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -67.5
+margin_top = 12.0
+margin_right = 67.5
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 1 )
+text = "Pirate Shop"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title2" type="Label" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -149.0
+margin_top = 32.0
+margin_right = -72.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 2 )
+text = "Cannonball: 5 gold"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cannonball" type="TextureButton" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -149.0
+margin_top = 44.0
+margin_right = -117.0
+margin_bottom = 54.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect/Cannonball"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 3 )
+text = "BUY"
+align = 1
+valign = 1
+
+[node name="Title3" type="Label" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -54.0
+margin_top = 32.0
+margin_right = 24.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 2 )
+text = "Repair: 5 gold"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Repair" type="TextureButton" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -47.0
+margin_top = 44.0
+margin_right = -15.0
+margin_bottom = 54.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect/Repair"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 3 )
+text = "BUY"
+align = 1
+valign = 1
+
+[node name="Paused" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.321569 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Paused"]
+margin_left = 8.0
+margin_top = 24.0
+margin_right = 112.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 5 )
+text = "Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Paused"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -152.0
+margin_top = 56.0
+margin_right = -88.0
+margin_bottom = 108.0
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="TextureButton" parent="Paused/VBoxContainer"]
+margin_right = 64.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 11 )
+texture_hover = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Paused/VBoxContainer/Continue"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 3.0
+margin_top = -7.0
+margin_right = 60.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 4 )
+text = "Continue"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="TextureButton" parent="Paused/VBoxContainer"]
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 52.0
+texture_normal = SubResource( 6 )
+texture_hover = SubResource( 7 )
+
+[node name="Label" type="Label" parent="Paused/VBoxContainer/Quit"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 3.0
+margin_top = -7.0
+margin_right = 60.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 4 )
+text = "Quit"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Paused/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Paused/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

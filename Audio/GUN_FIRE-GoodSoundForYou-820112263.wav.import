@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GUN_FIRE-GoodSoundForYou-820112263.wav-80e15e97ef1cd534be2b1d14d7c483ec.sample"
+
+[deps]
+
+source_file="res://Audio/GUN_FIRE-GoodSoundForYou-820112263.wav"
+dest_files=[ "res://.import/GUN_FIRE-GoodSoundForYou-820112263.wav-80e15e97ef1cd534be2b1d14d7c483ec.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
