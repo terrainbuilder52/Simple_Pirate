@@ -4,10 +4,11 @@ var max_health = 100
 var health = max_health
 
 signal death
+signal hit
 
 func _process(delta):
 	health = clamp(health, 0, max_health)
-	$Label.text = "Health: " + str(health)
+	$IslandCounter/Label.text = str(health)
 	
 	#DEATH
 	if health <= 0:
@@ -15,6 +16,7 @@ func _process(delta):
 	
 func hit():
 	health -= 1
+	emit_signal("hit")
 
 func on_death():
 	emit_signal("death")

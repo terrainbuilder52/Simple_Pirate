@@ -3,6 +3,9 @@ extends Control
 var scene = ""
 onready var tween = get_node("Tween")
 
+func _ready():
+	Global.time_now = 0
+
 func _on_Quit_pressed():
 	get_tree().quit()
 

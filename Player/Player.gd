@@ -18,6 +18,8 @@ export var gold = 0
 export var max_health = 10
 var health = max_health
 export var repair_cost = 5
+var island_max_health = 100
+var island_health = island_max_health
 
 signal death
 
@@ -37,6 +39,9 @@ func _process(delta):
 	
 	health = clamp(health, 0, max_health)
 	$Camera2D/CanvasLayer/Control/HealthCounter/Label.text = str(health)
+	
+	island_health = clamp(island_health, 0, island_max_health)
+	$Camera2D/CanvasLayer/Control/IslandCounter/Label.text = str(island_health)
 		
 	#FIRING
 	if can_fire:
@@ -84,8 +89,6 @@ func _physics_process(delta):
 			var collision = get_slide_collision(i)
 			var collider = collision.collider
 			
-			print(collider)
-			
 			if collider.has_method("hit_enemy"):
 				collider.hit_enemy(3)
 				$Camera2D/ScreenShake.start(0.2, 30, 1, 0)
@@ -131,3 +134,7 @@ func _on_Repair_pressed():
 
 func on_death():
 	emit_signal("death")
+
+
+func _on_HomeIsland_hit():
+	island_health -= 1

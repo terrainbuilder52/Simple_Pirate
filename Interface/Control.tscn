@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Interface/CannonCounter/CannonCounter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Interface/GoldCounter/GoldCounter.tscn" type="PackedScene" id=2]
@@ -12,16 +12,21 @@
 [ext_resource path="res://Interface/HealthCounter/HealthCounter.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Interface/Title_button_normal.png" type="Texture" id=11]
 [ext_resource path="res://Interface/Title_button_hover.png" type="Texture" id=12]
+[ext_resource path="res://Interface/IslandHealthCounter/IslandCounter.tscn" type="PackedScene" id=13]
 
 [sub_resource type="DynamicFont" id=1]
-size = 15
+size = 6
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 9
+size = 15
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 9
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 6
 font_data = ExtResource( 6 )
 
@@ -29,14 +34,14 @@ font_data = ExtResource( 6 )
 size = 28
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 12
 font_data = ExtResource( 6 )
 
-[sub_resource type="StreamTexture" id=6]
+[sub_resource type="StreamTexture" id=7]
 load_path = "res://.import/Title_button_normal.png-f2d631961defa174fb3b14f264393323.stex"
 
-[sub_resource type="StreamTexture" id=7]
+[sub_resource type="StreamTexture" id=8]
 load_path = "res://.import/Title_button_hover.png-a71867e5a5d5e2e7d6cd38993a0e28c2.stex"
 
 [node name="Control" type="Control"]
@@ -48,10 +53,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthCounter" parent="." instance=ExtResource( 10 )]
+[node name="Hints" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -160.0
+margin_top = -20.0
+margin_right = 160.0
+margin_bottom = -6.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.301961, 0.301961, 0.301961, 1 )
+custom_constants/shadow_offset_x = -1
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 0
+text = "Hint: Press W, A, S, D to move."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IslandCounter" parent="." instance=ExtResource( 13 )]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 41.0
+margin_bottom = 24.0
+
+[node name="HealthCounter" parent="." instance=ExtResource( 10 )]
+margin_left = 48.0
+margin_top = 8.0
+margin_right = 81.0
 margin_bottom = 24.0
 
 [node name="CannonCounter" parent="." instance=ExtResource( 1 )]
@@ -67,6 +99,7 @@ margin_right = 312.0
 margin_bottom = 24.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -88,7 +121,7 @@ margin_left = -67.5
 margin_top = 12.0
 margin_right = 67.5
 margin_bottom = 29.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Pirate Shop"
 align = 1
 __meta__ = {
@@ -102,7 +135,7 @@ margin_left = -149.0
 margin_top = 32.0
 margin_right = -72.0
 margin_bottom = 49.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Cannonball: 5 gold"
 align = 1
 __meta__ = {
@@ -133,7 +166,7 @@ margin_left = -20.0
 margin_top = -7.0
 margin_right = 20.0
 margin_bottom = 7.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "BUY"
 align = 1
 valign = 1
@@ -145,7 +178,7 @@ margin_left = -54.0
 margin_top = 32.0
 margin_right = 24.0
 margin_bottom = 49.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Repair: 5 gold"
 align = 1
 __meta__ = {
@@ -176,7 +209,7 @@ margin_left = -20.0
 margin_top = -7.0
 margin_right = 20.0
 margin_bottom = 7.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "BUY"
 align = 1
 valign = 1
@@ -223,7 +256,7 @@ margin_left = 3.0
 margin_top = -7.0
 margin_right = 60.0
 margin_bottom = 7.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 text = "Continue"
 align = 1
 valign = 1
@@ -235,8 +268,8 @@ __meta__ = {
 margin_top = 32.0
 margin_right = 64.0
 margin_bottom = 52.0
-texture_normal = SubResource( 6 )
-texture_hover = SubResource( 7 )
+texture_normal = SubResource( 7 )
+texture_hover = SubResource( 8 )
 
 [node name="Label" type="Label" parent="Paused/VBoxContainer/Quit"]
 anchor_top = 0.5
@@ -245,12 +278,15 @@ margin_left = 3.0
 margin_top = -7.0
 margin_right = 60.0
 margin_bottom = 7.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 text = "Quit"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="."]
 [connection signal="pressed" from="Paused/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Paused/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -5,6 +5,8 @@ onready var tween = get_node("Tween")
 func _ready():
 	tween.interpolate_property($Credits, "margin_top", $Credits.margin_top, -75, 5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
+	
+	$Time.text = "Time Survived: " + str(Global.get_time())
 
 
 func _on_Quit_pressed():

@@ -1,47 +1,14 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/background.png" type="Texture" id=2]
-[ext_resource path="res://World/Islands/pirateisland-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://YSort.gd" type="Script" id=3]
 [ext_resource path="res://World/Islands/Rock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World.gd" type="Script" id=5]
 [ext_resource path="res://World/Islands/Island.tscn" type="PackedScene" id=6]
-[ext_resource path="res://World/Islands/PirateIsland.gd" type="Script" id=7]
 [ext_resource path="res://Audio/intro_music.ogg" type="AudioStream" id=8]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 148, 128 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
-region = Rect2( 148, 0, 148, 128 )
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
-"loop": true,
-"name": "default",
-"speed": 1.0
-} ]
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends StaticBody2D
-
-onready var PIRATE_SCENE = preload(\"res://Pirate/Pirate.tscn\")
-
-func _ready():
-	randomize()
-	$Timer.start(10)
-
-func _on_Timer_timeout():
-	var pirate = PIRATE_SCENE.instance()
-	pirate.position = $Position2D.get_global_position()
-	get_parent().add_child(pirate)
-	$Timer.set_wait_time(rand_range(20, 60))
-"
-
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 694, 10 )
 
 [node name="World" type="Node2D"]
@@ -54,80 +21,13 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="YSort" type="YSort" parent="."]
+script = ExtResource( 3 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 641, 384 )
 
 [node name="HomeIsland" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 640, 360 )
-
-[node name="PirateIsland" type="StaticBody2D" parent="YSort"]
-position = Vector2( 922, 204 )
-collision_layer = 19
-collision_mask = 19
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="YSort/PirateIsland"]
-position = Vector2( 0, -14 )
-frames = SubResource( 3 )
-frame = 1
-playing = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/PirateIsland"]
-polygon = PoolVector2Array( -62, 5, 63, 6, 51, 0, -37, -1 )
-
-[node name="Position2D" type="Position2D" parent="YSort/PirateIsland"]
-position = Vector2( -7, 10 )
-
-[node name="Timer" type="Timer" parent="YSort/PirateIsland"]
-
-[node name="PirateIsland2" type="StaticBody2D" parent="YSort"]
-position = Vector2( 336.711, 199.389 )
-collision_layer = 19
-collision_mask = 19
-script = SubResource( 4 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="YSort/PirateIsland2"]
-position = Vector2( 0, -14 )
-frames = SubResource( 3 )
-frame = 1
-playing = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/PirateIsland2"]
-polygon = PoolVector2Array( -62, 5, 63, 6, 51, 0, -37, -1 )
-
-[node name="Position2D" type="Position2D" parent="YSort/PirateIsland2"]
-position = Vector2( -7, 10 )
-
-[node name="Timer" type="Timer" parent="YSort/PirateIsland2"]
-
-[node name="PirateIsland3" type="StaticBody2D" parent="YSort"]
-position = Vector2( 115.433, 498.818 )
-collision_layer = 19
-collision_mask = 19
-script = SubResource( 4 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="YSort/PirateIsland3"]
-position = Vector2( 0, -14 )
-frames = SubResource( 3 )
-playing = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/PirateIsland3"]
-polygon = PoolVector2Array( -62, 5, 63, 6, 51, 0, -37, -1 )
-
-[node name="Position2D" type="Position2D" parent="YSort/PirateIsland3"]
-position = Vector2( -7, 10 )
-
-[node name="Timer" type="Timer" parent="YSort/PirateIsland3"]
 
 [node name="Rock" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 526.891, 443.272 )
@@ -144,6 +44,36 @@ position = Vector2( 463.424, 174.372 )
 [node name="Rock5" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 833.37, 159.34 )
 
+[node name="Rock6" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 63.5464, 394.73 )
+
+[node name="Rock7" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 688.581, 642.708 )
+
+[node name="Rock8" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1017.93, 246.19 )
+
+[node name="Rock9" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 173.867, 608.393 )
+
+[node name="Rock10" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1074.83, 574.303 )
+
+[node name="Rock11" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1067.04, 66.843 )
+
+[node name="Rock12" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 151.464, 98.9854 )
+
+[node name="Island1" type="Position2D" parent="YSort"]
+position = Vector2( 1103.3, 358.729 )
+
+[node name="Island2" type="Position2D" parent="YSort"]
+position = Vector2( 300.82, 133.339 )
+
+[node name="Island3" type="Position2D" parent="YSort"]
+position = Vector2( 327.222, 612.133 )
+
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( 11.3947, -8.60524 )
 __meta__ = {
@@ -152,7 +82,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 position = Vector2( 575.976, 0.0168285 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Wall4" type="StaticBody2D" parent="."]
 position = Vector2( 118.063, 729.944 )
@@ -162,7 +92,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
 position = Vector2( 575.976, 0.0168285 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Wall2" type="StaticBody2D" parent="."]
 position = Vector2( -9.97424, 114.777 )
@@ -173,7 +103,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
 position = Vector2( 575.976, 0.0168285 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Wall3" type="StaticBody2D" parent="."]
 position = Vector2( 1289.95, 88.3467 )
@@ -184,22 +114,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
 position = Vector2( 575.976, 0.0168285 )
-shape = SubResource( 5 )
-
-[node name="Rock6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1017.93, 246.19 )
-
-[node name="Rock7" parent="." instance=ExtResource( 4 )]
-position = Vector2( 173.867, 608.393 )
-
-[node name="Rock8" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1074.83, 574.303 )
-
-[node name="Rock9" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1067.04, 66.843 )
-
-[node name="Rock10" parent="." instance=ExtResource( 4 )]
-position = Vector2( 151.464, 98.9854 )
+shape = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
@@ -207,6 +122,4 @@ volume_db = -29.877
 autoplay = true
 [connection signal="death" from="YSort/Player" to="." method="_on_Player_death"]
 [connection signal="death" from="YSort/HomeIsland" to="." method="_on_HomeIsland_death"]
-[connection signal="timeout" from="YSort/PirateIsland/Timer" to="YSort/PirateIsland" method="_on_Timer_timeout"]
-[connection signal="timeout" from="YSort/PirateIsland2/Timer" to="YSort/PirateIsland2" method="_on_Timer_timeout"]
-[connection signal="timeout" from="YSort/PirateIsland3/Timer" to="YSort/PirateIsland3" method="_on_Timer_timeout"]
+[connection signal="hit" from="YSort/HomeIsland" to="YSort/Player" method="_on_HomeIsland_hit"]

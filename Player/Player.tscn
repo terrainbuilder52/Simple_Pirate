@@ -132,7 +132,6 @@ script = ExtResource( 2 )
 position = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 hframes = 12
-frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
@@ -167,9 +166,6 @@ limit_bottom = 720
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="Control" parent="Camera2D/CanvasLayer" instance=ExtResource( 3 )]
-
-[node name="NinePatchRect" parent="Camera2D/CanvasLayer/Control" index="3"]
-visible = false
 
 [node name="Rammed" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
